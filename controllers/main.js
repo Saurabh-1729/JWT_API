@@ -1,3 +1,4 @@
+const { BadRequest } = require('../errors');
 const CustomAPIError = require('../errors/custom-error')
 const jwt = require('jsonwebtoken');
 
@@ -7,7 +8,7 @@ const login = async (req, res) => {
     // we can check it using mongo as well, but in this case we are not using mongo
 
     if (!username || !password) {
-        throw new CustomAPIError('Please provide email and password', 400);
+        throw new BadRequest('Please provide email and password');
     }
     // in payload do not non confidential data
     // payload, signature, expiry
@@ -35,7 +36,7 @@ const dashboard = async (req, res) => {
         secret: `Here is your authorized data, your lucky number is ${luckyNumber}`
     })
     // } catch (error) {
-    throw new CustomAPIError('Not authorized to access this route', 401);
+    // throw new CustomAPIError('Not authorized to access this route', 401);
     // }
 }
 
